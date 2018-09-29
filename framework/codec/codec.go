@@ -3,7 +3,7 @@ package codec
 import (
 	"errors"
 
-	"github.com/grepory/storage/runtime/codec/protobuf"
+	"github.com/grepory/storage/framework/codec/protobuf"
 )
 
 // A Codec is responsible for Encoding and Decoding data to

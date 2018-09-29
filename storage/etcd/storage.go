@@ -4,18 +4,16 @@ import (
 	"context"
 	"errors"
 
-	"github.com/grepory/storage/runtime/codec"
+	"github.com/grepory/storage/framework/codec"
+	"github.com/grepory/storage/storage"
 	"go.etcd.io/etcd/clientv3"
-)
-
-var (
-	InvalidInterfaceError = errors.New("object cannot be serialized")
 )
 
 // Storage is a light wrapper around an etcd client.
 type Storage struct {
-	Client *clientv3.Client
-	Codec  codec.Codec
+	Client  *clientv3.Client
+	Codec   codec.Codec
+	KeyFunc storage.KeyFunc
 }
 
 // Get a key from storage and deserialize it into objPtr.
