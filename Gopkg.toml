@@ -33,6 +33,10 @@
   name = "go.etcd.io/etcd"
   version = "3.3.9"
 
+[[constraint]]
+  name = "github.com/emicklei/go-restful"
+  version = "2.8.0"
+
 [prune]
   go-tests = true
   unused-packages = true
