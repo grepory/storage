@@ -9,11 +9,8 @@ import (
 	"go.etcd.io/etcd/clientv3"
 )
 
-const (
-	etcdRoot = "/sensu.io"
-)
-
-func NewEtcdStorage(client *clientv3.Client, codec codec.Codec) storage.Store {
+// NewStorage returns new non-prefixed etcd store.
+func NewStorage(client *clientv3.Client, codec codec.Codec) storage.Store {
 	return &Storage{
 		client: client,
 		codec:  codec,

@@ -35,7 +35,7 @@ func TestDeserialize(t *testing.T) {
 
 	client.Put(context.TODO(), "key", string(serialized))
 
-	store := etcd.NewEtcdStorage(client, codec.UniversalCodec())
+	store := etcd.NewStorage(client, codec.UniversalCodec())
 
 	into := &simple.Simple{}
 
