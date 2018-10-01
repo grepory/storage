@@ -5,6 +5,7 @@ ROOT=$(dirname "${BASH_SOURCE}")/..
 PACKAGES=(
     github.com/grepory/storage/apis/meta
     github.com/grepory/storage/apis/simple
+    github.com/grepory/storage/apis/rbac
 )
 
 go-to-protobuf \

@@ -25,5 +25,5 @@ func ValidateName(name string) error {
 		return fmt.Errorf("cannot be empty string")
 	}
 
-	return nil
+	return containsIllegalString(name)
 }
