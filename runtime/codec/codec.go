@@ -1,8 +1,7 @@
 package codec
 
 import (
-	"errors"
-
+	"github.com/grepory/storage/runtime/codec/json"
 	"github.com/grepory/storage/runtime/codec/protobuf"
 )
 
@@ -16,6 +15,7 @@ type Codec interface {
 var (
 	registeredCodecs = []Codec{
 		protobuf.ProtobufCodec{},
+		json.JsonCodec{},
 	}
 )
 
@@ -28,21 +28,28 @@ func UniversalCodec() Codec {
 type universalCodec struct{}
 
 func (universalCodec) Encode(objPtr interface{}) ([]byte, error) {
+	var (
+		bytes []byte
+		err   error
+	)
+
 	for _, c := range registeredCodecs {
-		bytes, err := c.Encode(objPtr)
+		bytes, err = c.Encode(objPtr)
 		if err == nil {
 			return bytes, nil
 		}
 	}
 
-	return nil, errors.New("unable to serialize object")
+	return nil, err
 }
 
 func (universalCodec) Decode(data []byte, objPtr interface{}) error {
+	var err error
+
 	for _, c := range registeredCodecs {
-		if err := c.Decode(data, objPtr); err == nil {
+		if err = c.Decode(data, objPtr); err == nil {
 			return nil
 		}
 	}
-	return errors.New("unable to deserialize object")
+	return err
 }

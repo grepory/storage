@@ -7,7 +7,7 @@ type Simple struct {
 
 	// Standard object metadata.
 	// +optional
-	*meta.ObjectMeta `json:"metadata" protobuf:"bytes,1,opt,name=metadata"`
+	meta.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
-	Field string `protobuf:"bytes,2,opt,name=field"`
+	Field string `json:"field" protobuf:"bytes,2,opt,name=field"`
 }

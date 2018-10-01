@@ -8,7 +8,7 @@ import (
 
 	"github.com/gogo/protobuf/proto"
 	"github.com/grepory/storage/apis/simple"
-	"github.com/grepory/storage/runtime/codec/protobuf"
+	"github.com/grepory/storage/runtime/codec"
 	"github.com/grepory/storage/storage/etcd"
 	"go.etcd.io/etcd/clientv3"
 )
@@ -35,10 +35,7 @@ func TestDeserialize(t *testing.T) {
 
 	client.Put(context.TODO(), "key", string(serialized))
 
-	store := &etcd.Storage{
-		Client: client,
-		Codec:  protobuf.ProtobufCodec{},
-	}
+	store := etcd.NewStorage(client, codec.UniversalCodec())
 
 	into := &simple.Simple{}
 
