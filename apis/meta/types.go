@@ -1,8 +1,8 @@
 package meta
 
 type TypeMeta struct {
-	Kind  string `protobuf:"bytes,1,opt,name=kind"`
-	Group string `protobuf:"bytes,2,opt,name=group"`
+	Kind       string `json:"kind" protobuf:"bytes,1,opt,name=kind"`
+	APIVersion string `json:"apiVersion" protobuf:"bytes,2,opt,name=apiVersion"`
 }
 
 // ObjectMeta is metadata that all persisted resources must have, which includes all objects
@@ -73,13 +73,6 @@ type ObjectMeta struct {
 	// More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
 	// +optional
 	DeletionTimestamp *Time `json:"deletionTimestamp,omitempty" protobuf:"bytes,6,opt,name=deletionTimestamp"`
-
-	// Number of seconds allowed for this object to gracefully terminate before
-	// it will be removed from the system. Only set when deletionTimestamp is also set.
-	// May only be shortened.
-	// Read-only.
-	// +optional
-	DeletionGracePeriodSeconds *int64 `json:"deletionGracePeriodSeconds,omitempty" protobuf:"varint,7,opt,name=deletionGracePeriodSeconds"`
 
 	// Map of string keys and values that can be used to organize and categorize
 	// (scope and select) objects. May match selectors of replication controllers

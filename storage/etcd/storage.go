@@ -4,38 +4,48 @@ import (
 	"context"
 	"errors"
 
-	"github.com/grepory/storage/framework/codec"
+	"github.com/grepory/storage/runtime/codec"
 	"github.com/grepory/storage/storage"
 	"go.etcd.io/etcd/clientv3"
 )
 
+const (
+	etcdRoot = "/sensu.io"
+)
+
+func NewEtcdStorage(client *clientv3.Client, codec codec.Codec) storage.Store {
+	return &Storage{
+		client: client,
+		codec:  codec,
+	}
+}
+
 // Storage is a light wrapper around an etcd client.
 type Storage struct {
-	Client  *clientv3.Client
-	Codec   codec.Codec
-	KeyFunc storage.KeyFunc
+	client *clientv3.Client
+	codec  codec.Codec
 }
 
 // Get a key from storage and deserialize it into objPtr.
 func (s *Storage) Get(key string, objPtr interface{}) error {
-	resp, err := s.Client.Get(context.TODO(), key)
+	resp, err := s.client.Get(context.TODO(), key)
 	if err != nil {
 		return err
 	}
 
 	v := resp.Kvs[0].Value
 
-	return s.Codec.Decode(v, objPtr)
+	return s.codec.Decode(v, objPtr)
 }
 
 // Create an object in the store.
 func (s *Storage) Create(key string, objPtr interface{}) error {
-	serialized, err := s.Codec.Encode(objPtr)
+	serialized, err := s.codec.Encode(objPtr)
 	if err != nil {
 		return err
 	}
 
-	txn := s.Client.Txn(context.TODO()).If(
+	txn := s.client.Txn(context.TODO()).If(
 		keyNotFound(key),
 	).Then(
 		put(key, string(serialized)),
@@ -55,12 +65,12 @@ func (s *Storage) Create(key string, objPtr interface{}) error {
 
 // Update a key given with the serialized object.
 func (s *Storage) Update(key string, objPtr interface{}) error {
-	serialized, err := s.Codec.Encode(objPtr)
+	serialized, err := s.codec.Encode(objPtr)
 	if err != nil {
 		return err
 	}
 
-	txn := s.Client.Txn(context.TODO()).If(
+	txn := s.client.Txn(context.TODO()).If(
 		keyFound(key),
 	).Then(
 		put(key, string(serialized)),

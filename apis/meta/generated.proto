@@ -97,13 +97,6 @@ message ObjectMeta {
   // +optional
   optional Time deletionTimestamp = 6;
 
-  // Number of seconds allowed for this object to gracefully terminate before
-  // it will be removed from the system. Only set when deletionTimestamp is also set.
-  // May only be shortened.
-  // Read-only.
-  // +optional
-  optional int64 deletionGracePeriodSeconds = 7;
-
   // Map of string keys and values that can be used to organize and categorize
   // (scope and select) objects. May match selectors of replication controllers
   // and services.
@@ -164,6 +157,6 @@ message Timestamp {
 message TypeMeta {
   optional string kind = 1;
 
-  optional string group = 2;
+  optional string apiVersion = 2;
 }
 
