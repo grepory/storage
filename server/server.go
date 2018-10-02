@@ -11,6 +11,8 @@ import (
 	"github.com/grepory/storage/storage/etcd"
 
 	"github.com/emicklei/go-restful"
+	"github.com/emicklei/go-restful-openapi"
+	"github.com/go-openapi/spec"
 	"go.etcd.io/etcd/clientv3"
 )
 
@@ -19,16 +21,19 @@ type Simple struct {
 	store storage.Store
 }
 
-// TODO: Add OpenAPI
 func (object Simple) WebService() *restful.WebService {
 	ws := new(restful.WebService)
 
 	ws.Path("/simple").
+		ApiVersion("v1").
 		Consumes(restful.MIME_JSON).
 		Produces(restful.MIME_JSON)
 
+	tags := []string{"Simple"}
+
 	ws.Route(ws.GET("/{name}").To(object.getSimple).
 		Doc("get a Simple").
+		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Param(ws.PathParameter("name", "name of the Simple").DataType("string")).
 		Writes(Simple{}).
 		Returns(http.StatusOK, http.StatusText(http.StatusOK), Simple{}).
@@ -36,10 +41,12 @@ func (object Simple) WebService() *restful.WebService {
 
 	ws.Route(ws.POST("").To(object.createSimple).
 		Doc("create a Simple").
+		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Reads(Simple{}))
 
 	ws.Route(ws.PUT("").To(object.updateSimple).
 		Doc("update a Simple").
+		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Reads(Simple{}))
 
 	return ws
@@ -96,5 +103,32 @@ func main() {
 
 	store := etcd.NewStorage(client, codec.UniversalCodec())
 	restful.Add(Simple{store: store}.WebService())
+
+	openAPIConfig := restfulspec.Config{
+		WebServices: restful.RegisteredWebServices(),
+		APIPath:     "/openapi.json",
+		PostBuildSwaggerObjectHandler: enrichSwaggerObject,
+	}
+	restful.Add(restfulspec.NewOpenAPIService(openAPIConfig))
+
 	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+func enrichSwaggerObject(swo *spec.Swagger) {
+	swo.Info = &spec.Info{
+		InfoProps: spec.InfoProps{
+			Title:       "Sensu API",
+			Description: "Some description of the API.",
+			Version:     "1.0.0",
+		},
+	}
+
+	swo.Tags = []spec.Tag{
+		spec.Tag{
+			TagProps: spec.TagProps{
+				Name:        "Simple",
+				Description: "Manipulating Simple objects",
+			},
+		},
+	}
 }
