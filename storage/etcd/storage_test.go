@@ -24,6 +24,7 @@ func TestDeserialize(t *testing.T) {
 		t.FailNow()
 	}
 
+	// TODO(ccressent): use an embedded etcd for testing
 	client, err := clientv3.New(clientv3.Config{
 		Endpoints:   []string{"http://localhost:2379"},
 		DialTimeout: 2 * time.Second,

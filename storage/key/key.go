@@ -1,6 +1,10 @@
 // Package paths provides utility functions to produce the path to
 // a resource in storage.
 
+// TODO(ccressent): NamespaceKeyerFunc() and NoNamepsaceKeyerFunc() bodies can
+// be abstracted away in a helper function.
+// TODO(ccressent): unify errors across KeyerFunc; right now they return
+// different errors for what should be exactly the same error.
 package key
 
 import (
