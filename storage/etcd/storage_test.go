@@ -39,7 +39,10 @@ func TestDeserialize(t *testing.T) {
 
 	client := getClient(t)
 
-	client.Put(context.TODO(), "key", string(serialized))
+	_, err = client.Put(context.TODO(), "key", string(serialized))
+	if err != nil {
+		t.Fatalf("failed to create a key: %s", err.Error())
+	}
 
 	store := etcd.NewStorage(client, codec.UniversalCodec())
 
@@ -74,14 +77,24 @@ func TestList(t *testing.T) {
 	}
 
 	client := getClient(t)
-	_, _ = client.Put(context.TODO(), "simple/foo", string(serializedFoo))
-	_, _ = client.Put(context.TODO(), "simple/bar", string(serializedBar))
+	_, err = client.Put(context.TODO(), "simple/foo", string(serializedFoo))
+	if err != nil {
+		t.Fatalf("failed to create a key: %s", err.Error())
+	}
+	_, err = client.Put(context.TODO(), "simple/bar", string(serializedBar))
+	if err != nil {
+		t.Fatalf("failed to create a key: %s", err.Error())
+	}
 
 	store := etcd.NewStorage(client, codec.UniversalCodec())
 	into := []simple.Simple{}
 
 	if err := store.List("simple", &into); err != nil {
 		t.Fatalf("failed getting from store: %s", err.Error())
+	}
+
+	if len(into) != 2 {
+		t.Fatalf("expected 2 elements, got %d", len(into))
 	}
 
 	if into[0].Field != "bar" {

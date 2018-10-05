@@ -89,7 +89,10 @@ func (s *Storage) List(key string, objsPtr interface{}) error {
 	for _, kv := range resp.Kvs {
 		// Decode and append the value to v, which must be a slice.
 		// See https://github.com/kubernetes/apiserver/blob/10d97565493b4eea44b1ef6c1b3fd47d2876a866/pkg/storage/etcd3/store.go#L786
-		obj := reflect.New(v.Type().Elem()).Interface().(meta.Object)
+		obj, ok := reflect.New(v.Type().Elem()).Interface().(meta.Object)
+		if !ok {
+			return fmt.Errorf("type assertion failed, got data of type %T, not meta.Object", v.Type().Elem())
+		}
 		if err := s.codec.Decode(kv.Value, obj); err != nil {
 			return err
 		}
