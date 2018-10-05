@@ -63,7 +63,8 @@ func (s *Storage) Create(key string, objPtr interface{}) error {
 	return nil
 }
 
-// List a key from storage and deserialize it into objsPtr.
+// List all keys from storage under the provided prefix key and deserialize it
+// into objsPtr.
 func (s *Storage) List(key string, objsPtr interface{}) error {
 	// Make sure the interface is a pointer, and that the element at this address
 	// is a slice.

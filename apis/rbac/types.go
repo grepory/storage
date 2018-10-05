@@ -93,7 +93,7 @@ type RoleBinding struct {
 	RoleRef RoleRef `json:"roleRef" protobuf:"bytes,3,name=roleRef"`
 }
 
-// Subject contains a reference to the user identify a role binding applies to
+// Subject contains a reference to the user identity a role binding applies to
 type Subject struct {
 	meta.TypeMeta `json:",inline"`
 

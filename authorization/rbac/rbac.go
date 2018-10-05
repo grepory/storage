@@ -8,7 +8,7 @@ import (
 	"github.com/grepory/storage/storage"
 )
 
-// Authorizer implements an authorizer interface using Roles Base Acccess
+// Authorizer implements an authorizer interface using Role-Based Acccess
 // Control (RBAC)
 type Authorizer struct {
 	store storage.Store
