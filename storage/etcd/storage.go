@@ -30,6 +30,10 @@ func (s *Storage) Get(key string, objPtr interface{}) error {
 		return err
 	}
 
+	if len(resp.Kvs) == 0 {
+		return storage.ErrNotFound
+	}
+
 	v := resp.Kvs[0].Value
 
 	return s.codec.Decode(v, objPtr)

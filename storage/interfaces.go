@@ -1,5 +1,11 @@
 package storage
 
+import "errors"
+
+var (
+	ErrNotFound = errors.New("object not found")
+)
+
 // A Store provides the methods necessary for interacting with
 // objects in some form of storage.
 type Store interface {
