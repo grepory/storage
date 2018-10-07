@@ -1,8 +1,8 @@
 package meta
 
 type TypeMeta struct {
-	Kind       string `json:"kind" protobuf:"bytes,1,opt,name=kind"`
-	APIVersion string `json:"apiVersion" protobuf:"bytes,2,opt,name=apiVersion"`
+	APIVersion string `json:"apiVersion,omitempty" yaml:"apiVersion,omitempty" protobuf:"bytes,1,opt,name=apiVersion"`
+	Kind       string `json:"kind,omitempty" yaml:"kind,omitempty" protobuf:"bytes,2,opt,name=kind"`
 }
 
 // ObjectMeta is metadata that all persisted resources must have, which includes all objects
