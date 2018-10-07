@@ -97,7 +97,7 @@ func (b RestServiceBuilder) createObject(strategy server.RestStrategy) restful.R
 		}
 
 		if err := b.store.Create(obj.GetName(), obj); err != nil {
-			resp.WriteError(http.StatusNotFound, err)
+			resp.WriteError(http.StatusInternalServerError, err)
 		}
 
 		resp.WriteEntity(obj)
