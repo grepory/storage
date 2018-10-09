@@ -44,3 +44,7 @@ func (sd *storageDecorator) Update(key string, obj interface{}) error {
 func (sd *storageDecorator) Get(key string, obj interface{}) error {
 	return sd.storage.Get(sd.withPrefix(key), obj)
 }
+
+func (sd *storageDecorator) List(key string, objs interface{}) error {
+	return sd.storage.List(sd.withPrefix(key), objs)
+}
