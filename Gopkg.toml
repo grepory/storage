@@ -3,7 +3,10 @@
 # Refer to https://golang.github.io/dep/docs/Gopkg.toml.html
 # for detailed Gopkg.toml documentation.
 #
-# required = ["github.com/user/thing/cmd/thing"]
+required = [
+  "k8s.io/code-generator/cmd/go-to-protobuf",
+  "k8s.io/apimachinery/pkg/util/intstr"
+]
 # ignored = ["github.com/user/project/pkgX", "bitbucket.org/user/project/pkgA/pkgY"]
 #
 # [[constraint]]
@@ -36,3 +39,11 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[[prune.project]]
+  name = "k8s.io/apimachinery"
+  unused-packages = false
+
+[[constraint]]
+  branch = "master"
+  name = "k8s.io/code-generator"
