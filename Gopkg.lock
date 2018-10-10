@@ -32,7 +32,7 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:db238461f652ddb7c7057bc6fc503f6003a29987b1485ecbb96d92287db65bc9"
+  digest = "1:da39f4a22829ca95e63566208e0ea42d6f055f41dff1b14fdab88d88f62df653"
   name = "github.com/gogo/protobuf"
   packages = [
     "gogoproto",
@@ -40,7 +40,7 @@
     "protoc-gen-gogo/descriptor",
     "sortkeys",
   ]
-  pruneopts = "UT"
+  pruneopts = "T"
   revision = "636bf0302bc95575d69441b25a2603156ffdddf1"
   version = "v1.1.1"
 
@@ -254,14 +254,6 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:10bbf99f8aa16a2fe38452281ee609bb60958e7ae0e37f910e396d51e5b56eb4"
-  name = "k8s.io/apimachinery"
-  packages = ["pkg/util/intstr"]
-  pruneopts = "T"
-  revision = "76721d167b7088b203cf9873c616b0cfec5c77bb"
-
-[[projects]]
-  branch = "master"
   digest = "1:f47b7236152b13a54a13104fdc9c81ea103f38dc1eeaa900a639a16e58259ca2"
   name = "k8s.io/code-generator"
   packages = [
@@ -292,13 +284,13 @@
   analyzer-version = 1
   input-imports = [
     "github.com/ghodss/yaml",
+    "github.com/gogo/protobuf/gogoproto",
     "github.com/gogo/protobuf/proto",
     "github.com/gogo/protobuf/sortkeys",
     "github.com/google/gofuzz",
     "github.com/json-iterator/go",
     "github.com/stretchr/testify/mock",
     "go.etcd.io/etcd/clientv3",
-    "k8s.io/apimachinery/pkg/util/intstr",
     "k8s.io/code-generator/cmd/go-to-protobuf",
   ]
   solver-name = "gps-cdcl"

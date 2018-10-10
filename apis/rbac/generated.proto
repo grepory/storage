@@ -39,13 +39,16 @@ message ClusterRole {
   repeated Rule rules = 2;
 }
 
-// A Group is a grouping of RoleRefs.
-message Group {
+// ClusterRoleBinding grants the permissions defined in a ClusterRole referenced
+// to a user or a set of users
+message ClusterRoleBinding {
   optional github.com.grepory.storage.apis.meta.ObjectMeta metadata = 1;
 
-  // RoleRefs is the list of RoleRefs that make up the roles for this
-  // Group.
-  repeated RoleRef roleRefs = 2;
+  // Subjects holds references to the objects the role applies to
+  repeated Subject subjects = 2;
+
+  // RoleRef is the reference to a ClusterRole in the global namespace
+  optional RoleRef roleRef = 3;
 }
 
 // A Role applies only to a single Namespace.
@@ -54,6 +57,18 @@ message Role {
 
   // Rules hold all of the Rules for this Role.
   repeated Rule rules = 2;
+}
+
+// RoleBinding grants the permissions defined in a Role referenced to a user or
+// a set of users
+message RoleBinding {
+  optional github.com.grepory.storage.apis.meta.ObjectMeta metadata = 1;
+
+  // Subjects holds references to the objects the role applies to
+  repeated Subject subjects = 2;
+
+  // RoleRef is the reference to a Role in the current namespace
+  optional RoleRef roleRef = 3;
 }
 
 // RoleRef is used to map groups to Roles or ClusterRoles.
@@ -75,13 +90,25 @@ message Rule {
   // TODO: add support for "watch" (via websockets)
   repeated string verbs = 1;
 
+  // APIGroups is the name of the APIGroup that contains the resource
+  repeated string apiGroups = 2;
+
   // Resources is a list of resources that this rule applies to.
   // "*" represents all resources.
   // TODO: enumerate "resources"
-  repeated string resources = 2;
+  repeated string resources = 3;
 
-  // Names is an optional list of resource names that the rule
+  // ResourceNames is an optional list of resource names that the rule
   // applies to.
-  repeated string names = 3;
+  repeated string resourceNames = 4;
+}
+
+// Subject contains a reference to the user identity a role binding applies to
+message Subject {
+  // Kind is the type of object referenced
+  optional string kind = 1;
+
+  // Name of the referenced object
+  optional string name = 2;
 }
 

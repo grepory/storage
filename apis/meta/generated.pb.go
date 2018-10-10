@@ -48,7 +48,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 func (m *ObjectMeta) Reset()      { *m = ObjectMeta{} }
 func (*ObjectMeta) ProtoMessage() {}
 func (*ObjectMeta) Descriptor() ([]byte, []int) {
-	return fileDescriptor_generated_139764bbd714ad10, []int{0}
+	return fileDescriptor_generated_e1d88134b4f9cc17, []int{0}
 }
 func (m *ObjectMeta) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -76,7 +76,7 @@ var xxx_messageInfo_ObjectMeta proto.InternalMessageInfo
 func (m *Time) Reset()      { *m = Time{} }
 func (*Time) ProtoMessage() {}
 func (*Time) Descriptor() ([]byte, []int) {
-	return fileDescriptor_generated_139764bbd714ad10, []int{1}
+	return fileDescriptor_generated_e1d88134b4f9cc17, []int{1}
 }
 func (m *Time) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Time.Unmarshal(m, b)
@@ -99,7 +99,7 @@ var xxx_messageInfo_Time proto.InternalMessageInfo
 func (m *Timestamp) Reset()      { *m = Timestamp{} }
 func (*Timestamp) ProtoMessage() {}
 func (*Timestamp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_generated_139764bbd714ad10, []int{2}
+	return fileDescriptor_generated_e1d88134b4f9cc17, []int{2}
 }
 func (m *Timestamp) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -127,7 +127,7 @@ var xxx_messageInfo_Timestamp proto.InternalMessageInfo
 func (m *TypeMeta) Reset()      { *m = TypeMeta{} }
 func (*TypeMeta) ProtoMessage() {}
 func (*TypeMeta) Descriptor() ([]byte, []int) {
-	return fileDescriptor_generated_139764bbd714ad10, []int{3}
+	return fileDescriptor_generated_e1d88134b4f9cc17, []int{3}
 }
 func (m *TypeMeta) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1268,10 +1268,10 @@ var (
 )
 
 func init() {
-	proto.RegisterFile("github.com/grepory/storage/apis/meta/generated.proto", fileDescriptor_generated_139764bbd714ad10)
+	proto.RegisterFile("github.com/grepory/storage/apis/meta/generated.proto", fileDescriptor_generated_e1d88134b4f9cc17)
 }
 
-var fileDescriptor_generated_139764bbd714ad10 = []byte{
+var fileDescriptor_generated_e1d88134b4f9cc17 = []byte{
 	// 594 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x54, 0x4d, 0x4f, 0xd4, 0x40,
 	0x18, 0x6e, 0xd9, 0x0f, 0xd8, 0x77, 0x55, 0x60, 0xc4, 0xd8, 0x70, 0x68, 0x37, 0xab, 0x07, 0x24,

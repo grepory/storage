@@ -9,7 +9,9 @@ PACKAGES=(
 )
 
 go-to-protobuf \
-    --proto-import=./vendor \
+    --proto-import="${ROOT}/vendor/github.com/gogo/protobuf/protobuf,${ROOT}/vendor" \
     --drop-embedded-fields=github.com/grepory/storage/apis/meta.TypeMeta \
     --packages=$(IFS=, ; echo "${PACKAGES[*]}") \
-    --go-header-file=${ROOT}/hack/update-protobuf-boilerplate.txt
+    --go-header-file=${ROOT}/hack/update-protobuf-boilerplate.txt \
+    --apimachinery-packages="" \
+    --output-base="$(go env GOPATH)/src"

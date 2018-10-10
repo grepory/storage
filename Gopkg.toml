@@ -5,7 +5,7 @@
 #
 required = [
   "k8s.io/code-generator/cmd/go-to-protobuf",
-  "k8s.io/apimachinery/pkg/util/intstr"
+  "github.com/gogo/protobuf/gogoproto"
 ]
 # ignored = ["github.com/user/project/pkgX", "bitbucket.org/user/project/pkgA/pkgY"]
 #
@@ -41,7 +41,7 @@ required = [
   unused-packages = true
 
 [[prune.project]]
-  name = "k8s.io/apimachinery"
+  name = "github.com/gogo/protobuf"
   unused-packages = false
 
 [[constraint]]

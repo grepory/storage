@@ -46,7 +46,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 func (m *Simple) Reset()      { *m = Simple{} }
 func (*Simple) ProtoMessage() {}
 func (*Simple) Descriptor() ([]byte, []int) {
-	return fileDescriptor_generated_4f5cf0e990c8dc52, []int{0}
+	return fileDescriptor_generated_11fb1c152cda5ac0, []int{0}
 }
 func (m *Simple) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -373,10 +373,10 @@ var (
 )
 
 func init() {
-	proto.RegisterFile("github.com/grepory/storage/apis/simple/generated.proto", fileDescriptor_generated_4f5cf0e990c8dc52)
+	proto.RegisterFile("github.com/grepory/storage/apis/simple/generated.proto", fileDescriptor_generated_11fb1c152cda5ac0)
 }
 
-var fileDescriptor_generated_4f5cf0e990c8dc52 = []byte{
+var fileDescriptor_generated_11fb1c152cda5ac0 = []byte{
 	// 256 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x32, 0x4b, 0xcf, 0x2c, 0xc9,
 	0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0x4f, 0x2f, 0x4a, 0x2d, 0xc8, 0x2f, 0xaa, 0xd4, 0x2f,
